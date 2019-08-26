@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - La Tirelire</title>
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style>
+        .back {
+            background-image: url('../../images/TirCochon_dessin_assombri1.jpg');
+            background-repeat: repeat;
+            
+        }
+        .sombre {
+            
+            
+        }
+        div.sombre {
+            color: cornsilk;
+        }
+        a.sombre:link
+        {
+            text-decoration: none;
+            color: orange;
+        }
+
+        a.sombre:visited {
+            text-decoration: none;
+            color:burlywood
+        }
+
+        a.sombre:hover {
+            text-decoration: underline;
+            color: yellow;
+        }
+
+        a.sombre:active {
+            text-decoration: underline;
+            color: red;
+        }
+        select.sombre {
+            background-color: black;
+            color: cornsilk;
+        }
+         sombre h1, h2, h3, h4, h5, p, footer, table, form, textarea {
+            /*color:black;*/
+            background-color: rgb(60, 60, 65);
+            
+            padding: 5px;
+        }
+        /*.sombre table input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+            .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+        }
+            .sombre table input:checked ~ .checkmark {
+            background-color: rgb(60, 60, 65);
+        }*/
+        
+        
+        
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            //$.validator.methods.range = function (value, element, param) {
+            //    var globalizedValue = value.replace(",", ".");
+            //    return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+            //}
+
+            $.validator.methods.number = function (value, element) {
+                return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:[\.,]\d+)?$/.test(value);
+            }
+        });
+        $(document).ready(function () {
+            
+                //$("a").addClass("sombre");
+                $("a,p,div,h1,h2,h3,h4,h5,h6,select,footer,input,table,form, textarea").addClass("sombre");
+            
+        });
+
+    </script>
+</head>
+<body class="back">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="width:90%">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @Html.ActionLink("La Tirelire", "Index", "Home"
+     , new { area = "" }
+     , new { @class = "navbar-brand", style = "font-family:Alpha Echo; font-size:300%" })
+
+                @Html.ActionLink(" ", "Index", "Panier"
+     , new { }
+     , new { @class = "btn btn-default glyphicon glyphicon-shopping-cart navbar-btn" })
+                &nbsp;&nbsp;&nbsp;
+                @{Html.RenderAction("PartielPanier", "Panier"); }
+
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Accueil", "Index", "Home")</li>*@
+                    
+                    @if (!(bool)Session["IsClient"])
+                    {
+                    <li>@Html.ActionLink("Produits", "Index", "Produit")</li>
+                    <li>@Html.ActionLink("Photos", "Index", "Photo")</li>
+                    <li>@Html.ActionLink("Fabricants", "Liste", "Fabricant")</li>
+                    <li>@Html.ActionLink("Adresses", "Index", "Adresse")</li>
+                    <li>@Html.ActionLink("Clients", "Index", "Client")</li>
+                    <li>@Html.ActionLink("Utilisateurs(BO)", "IndexBO", "Client")</li>
+                    <li>@Html.ActionLink("Commandes", "Index", "Commande")</li>
+                    <li>@Html.ActionLink("Commentaires", "ListeAvis", "Client")</li>
+                    }
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <br /> <br />
+
+    <div class="sombre container body-content" style="position:relative">
+        @RenderBody()
+        <hr />
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

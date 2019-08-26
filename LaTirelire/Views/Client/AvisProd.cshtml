@@ -1,0 +1,19 @@
+﻿@model IEnumerable<LaTirelire.Models.Comment>
+
+@{
+    ViewBag.Title = "AvisProd";
+}
+
+@if (Model.Count() == 0) { <p>Pas d'avis pour l'instant</p>}
+else
+{
+    foreach (var item in Model)
+    {
+        <p>
+            avis de @item.Client.prenom @item.Client.nom , le
+            @item.date :<br />
+            @item.text   
+        </p>
+    }
+}
+

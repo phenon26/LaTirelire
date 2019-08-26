@@ -1,0 +1,74 @@
+﻿@model LaTirelire.ViewModels.ClientCommandeViewModel
+
+@{
+    ViewBag.Title = "Commander";
+}
+
+<h2>Commander</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.Adresse.voie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.Adresse.voie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.Adresse1.voie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.Adresse1.voie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.actif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.actif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.leClient.tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.leClient.tel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Valider la Commande", "Validate", new { id = Model.laCommande.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

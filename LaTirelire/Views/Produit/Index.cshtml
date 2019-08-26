@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LaTirelire.Models.Produit>
+
+@{
+    ViewBag.Title = "Liste des produits";
+}
+
+<h2>Produits</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Fabricant", "Index", new { ordre = "Fabricant" })
+            @*@Html.DisplayNameFor(model => model.Fabricant.Nom)*@
+        </th>
+        <th>
+            @Html.ActionLink("Actif", "Index", new { ordre = "Actif" })
+        </th>
+        <th>
+            @Html.ActionLink("Nom", "Index", new { ordre="Nom"})
+        </th>
+        <th>
+            @Html.ActionLink("Prix", "Index", new { ordre="Prix"})
+        </th>
+        <th>
+            Hauteur (mm)
+            @*@Html.DisplayNameFor(model => model.Hauteur)*@
+        </th>
+        <th>
+            Largeur (mm)
+            @*@Html.DisplayNameFor(model => model.Largeur)*@
+        </th>
+        <th>
+            Longueur (mm)
+            @*@Html.DisplayNameFor(model => model.Longueur)*@
+        </th>
+        <th>
+            Poids (g)
+            @*@Html.DisplayNameFor(model => model.Poids)*@
+        </th>
+        <th>
+            Capacité (nombre de pièces de 1€)
+            @*@Html.DisplayNameFor(model => model.Capacite)*@
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Couleur)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fabricant.Nom)
+            </td>
+            <td>
+                @if (item.Actif)
+                {
+                    <a href="~/Produit/Desactiver/@item.id">[x]</a>
+                }
+                else
+                {<a href="~/Produit/Activer/@item.id">[ ]</a>}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hauteur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Largeur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longueur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Poids)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacite)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Couleur)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Photos", "Index", "Photo", new { id = item.id },new { }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

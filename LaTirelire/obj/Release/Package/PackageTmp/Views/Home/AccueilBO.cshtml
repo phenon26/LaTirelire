@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "AccueilBO";
+}
+
+<h2>Accueil Business Office</h2>
+
+<div>
+    <ul>
+        @*<li>@Html.ActionLink("Accueil", "Index", "Home")</li>*@
+        <li>@Html.ActionLink("Produits", "Index", "Produit")</li>
+        <li>@Html.ActionLink("Photos", "Index", "Photo")</li>
+        <li>@Html.ActionLink("Fabricants", "Liste", "Fabricant")</li>
+        <li>@Html.ActionLink("Adresses", "Index", "Adresse")</li>
+        <li>@Html.ActionLink("Clients", "Index", "Client")</li>
+        <li>@Html.ActionLink("Utilisateurs(BO)", "IndexBO", "Client")</li>
+        <li>@Html.ActionLink("Commandes", "Index", "Commande")</li>
+        <li>@Html.ActionLink("Commentaires", "ListeAvis", "Client")</li>
+
+
+    </ul>
+   
+</div>
+<div>
+    @if ((bool)ViewBag.IsModo)
+    {
+        Html.RenderAction("ListeAvisModeration", "Client");
+    }
+</div>
+
+

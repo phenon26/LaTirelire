@@ -1,0 +1,72 @@
+﻿@model LaTirelire.Models.Comment
+
+@{
+    ViewBag.Title = "DeleteAvis";
+}
+
+<h2>DeleteAvis</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Produit.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produit.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.visible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.visible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idModo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idModo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

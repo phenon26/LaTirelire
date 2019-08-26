@@ -1,0 +1,107 @@
+﻿@model LaTirelire.Models.Commande
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit commande</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idClient, "idClient", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.idClient, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idClient, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.statut, "statut", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("statut", (IEnumerable<SelectListItem>)ViewBag.dropStatuts, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.statut, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateCommande, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dateCommande, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dateCommande, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        Détails de la commande :
+        <table class="table table-condensed table-bordered" style="text-align:center; width:60%;">
+            <tr>
+                <th>
+                    Réf. du produit
+                </th>
+                <th>
+                    Nom du produit
+                </th>
+                <th>
+                    quantité
+                </th>
+                <th>
+                    Prix Unitaire (€)
+                </th>
+                @*<th></th>*@
+            </tr>
+
+            @foreach (var item in Model.DetailCommandes)
+            {
+
+                <tr>
+                    <td id="idProd" name="idProd">
+                        @Html.HiddenFor(modelItem => item.idProduit)
+                        @Html.DisplayFor(modelItem => item.idProduit)
+
+                    </td>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.Produit.Nom)
+                        @Html.DisplayFor(modelItem => item.Produit.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantite)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.PrixUnitaire)
+                        @Html.DisplayFor(modelItem => item.PrixUnitaire)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink(" ", "DeleteLine", new { id = item.idProduit }, new { type = "submit", @class = "glyphicon glyphicon-trash" })
+                        </td>*@
+                </tr>
+            }
+
+        </table>
+        
+        <div style="width:60%; text-align:right; font-size:large;">
+            Poids total = @(((decimal)ViewBag.Poids).ToString("N3")) kg  -> frais de port = @(((decimal)ViewBag.FraisDePort).ToString("N2")) €
+            <br />
+
+        </div>
+        <div style="width:60%; text-align:right; font-size:x-large;">
+            <b>Total de la Commande = @(((decimal)ViewBag.TotalCommande).ToString("N2")) €</b>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

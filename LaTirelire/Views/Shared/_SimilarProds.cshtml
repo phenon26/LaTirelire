@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LaTirelire.Models.Produit>
+<style>
+    /* Three image containers (use 25% for four, and 50% for two, etc) */
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        line-snap: contain;
+        line-grid: create;
+        
+    }
+  
+    /* Clear floats after image containers */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+        
+    }
+
+    .thumbPir {
+        height:80px;
+    }
+
+    .thumbPir:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
+</style>
+
+@{if (Model.Count() > 0)
+    {
+        <h5><i>Produits similaires : </i></h5>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="column">
+                    <div class="container" style="max-height:80px;">
+                        <a href="~/fiche/@item.id">
+                            @if (item.Photos.Where(p => p.isMain == true).Count() > 0)
+                            {
+                                <img class="thumbPir" src="~/photos/@item.Photos.Where(p => p.isMain == true).First().nomFichier" />
+                            }
+                            else
+                            {
+                                <img class="thumbPir" src="~/photos/@item.Photos.First().nomFichier" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+        
+    }
+}

@@ -1,0 +1,120 @@
+﻿@model LaTirelire.ViewModels.ProduitPhotosViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Fabricant.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Fabricant.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Actif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Actif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Hauteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Hauteur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Largeur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Largeur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Longueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Longueur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Poids)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Poids)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Capacite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Capacite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.produit.Couleur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.produit.Couleur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.produit.id }) |
+    @Html.ActionLink("Photos", "Index", "Photo", new { id = Model.produit.id }, new { }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<span>
+    @{ 
+        foreach (var item in Model.photos)
+        {
+            <p>
+                <img src="~/photos/@Html.DisplayFor(modelItem=>item.nomFichier)" class="img-thumbnail" style="max-height:120px"/>
+            </p>
+        }
+    }
+</span>
+
+

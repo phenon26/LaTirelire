@@ -1,0 +1,12 @@
+﻿@model LaTirelire.ViewModels.PartielPanierViewModel
+
+<div style="color:lightgray ;text-align:center; float:right; text-align:center;" >
+    
+    <b>  Panier :</b>
+    @*<br />*@
+    <span class="container-fluid" style="color:floralwhite; width:auto">
+        @Html.DisplayFor(m => m.nbreArticles) articles
+        <br />
+        @Html.DisplayFor(m => m.montantPanier) €
+    </span>
+</div>

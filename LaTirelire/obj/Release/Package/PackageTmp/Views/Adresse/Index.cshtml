@@ -1,0 +1,72 @@
+﻿@model IEnumerable<LaTirelire.Models.Adresse>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    function fnFailure() {
+        alert("Ratage rendu vue partielle création adresse")
+    }
+
+</script>
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "_AdresseCreate")*@
+    @Ajax.ActionLink("Create New", "Create"   
+    , new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "vuepartielle", InsertionMode = InsertionMode.Replace, OnFailure = "fnFailure();" }
+   )
+</p>
+
+
+<div id="vuepartielle" ></div>
+
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor((model => model.numero))
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.voie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codePostal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ville)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pays)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.voie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codePostal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ville)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pays)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @*@Html.ActionLink("Details", "Details", new { id = item.id }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

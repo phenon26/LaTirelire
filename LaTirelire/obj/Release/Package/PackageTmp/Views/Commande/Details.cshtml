@@ -1,0 +1,97 @@
+﻿@model LaTirelire.Models.Commande
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commande</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nom Client
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.nom)
+        </dd>
+
+        <dt>
+           Statut Commande
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Statut1.nomStatut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCommande)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCommande)
+        </dd>
+
+    </dl>
+</div>
+        Détails de la commande :
+<table class="table table-condensed table-bordered" style="text-align:center; width:60%;">
+    <tr>
+        <th>
+            Réf. du produit
+        </th>
+        <th>
+            Nom du produit
+        </th>
+        <th>
+            quantité
+        </th>
+        <th>
+            Prix Unitaire (€)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model.DetailCommandes)
+    {
+
+        <tr>
+            <td id="idProd" name="idProd">
+                @Html.HiddenFor(modelItem => item.idProduit)
+                @Html.DisplayFor(modelItem => item.idProduit)
+
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.Produit.Nom)
+                @Html.DisplayFor(modelItem => item.Produit.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantite)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.PrixUnitaire)
+                @Html.DisplayFor(modelItem => item.PrixUnitaire)
+            </td>
+            @*<td>
+                    @Html.ActionLink(" ", "DeleteLine", new { id = item.idProduit }, new { type = "submit", @class = "glyphicon glyphicon-trash" })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+<div style="width:60%; text-align:right; font-size:large;">
+    Poids total = @(((decimal)ViewBag.Poids).ToString("N3")) kg  -> frais de port = @(((decimal)ViewBag.FraisDePort).ToString("N2")) €
+    <br />
+
+</div>
+<div style="width:60%; text-align:right; font-size:x-large;">
+    <b>Total de la Commande = @(((decimal)ViewBag.TotalCommande).ToString("N2")) €</b>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

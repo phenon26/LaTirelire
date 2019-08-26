@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LaTirelire.ViewModels.UsersBoViewModel>
+
+@{
+    ViewBag.Title = "Liste Utilisateurs Back Office";
+}
+
+<h2>Liste des Utilisateurs Back Office</h2>
+
+<p>
+    @Html.ActionLink("Créer nouvel utilisateur", "RegisterBO", "Account")
+</p>
+<table class="table">
+    <tr>
+        <th>            
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.responsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.assistant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.moderateur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.admin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.email)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.responsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.assistant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moderateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.admin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditBO", new { id=item.id }) |
+            @*@Html.ActionLink("Details", "DetailsBO", new { id=item.id }) |*@
+            @Html.ActionLink("Delete", "DeleteBO", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

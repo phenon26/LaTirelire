@@ -1,0 +1,297 @@
+﻿@model LaTirelire.ViewModels.ProduitPhotosViewModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<style>
+    .imagecarou {
+        max-height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+@*<h4>Fiche détaillée :</h4>*@
+<div class="container" width="40%">
+    <div class="well" style="background-color:dimgrey">
+        <h1 style="font-family:'Café Françoise'">
+            @Html.DisplayFor(model => model.produit.Nom)
+        </h1>
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+                <td style="font-family:Impact; font-size:xx-large; font-stretch:extra-expanded; text-align:center; background-color:black; color:whitesmoke; margin-left:10px; width:50%">
+                    @Html.DisplayFor(model => model.produit.Prix) €
+                </td>
+                <td>
+
+
+                    <b>
+                        @Html.ActionLink("Ajouter au panier", "AjoutPanier"
+, new { id = Model.produit.id }
+, new { @class = "btn btn-default glyphicon glyphicon-shopping-cart"
+, style = "font-size:x-large;" })
+                    </b>
+
+
+                </td>
+                <td>
+                    @Html.ActionLink("Retour à la liste des produits", "Index", new { }, new { @class = "btn btn-defaut"
+, style = "color:white; background-color:black; font-size:150%; width:100%;" })
+
+                </td>
+            </tr>
+
+
+
+
+        </table>
+
+
+    </div>
+</div>
+@*petites images à droite -> clic ouvre agrandissement ds fenêtre modale*@
+<div class="container" style="position:relative">
+    <div style="width:25%; float:right; max-height:300px; position:relative; overflow:auto">
+
+        @if (Model.photos.Count() != 0)
+        {
+            foreach (var photo in Model.photos)
+            {
+                <!-- Trigger the modal with a button -->
+                <div class="img-thumbnail">
+                    <img src="~/photos/@photo.nomFichier"
+                         type="button" data-toggle="modal" data-target="#imgModal@{@photo.id;}"
+                         style="max-height:120px" />
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="imgModal@{@photo.id;}" role="dialog" style="text-align:center; position:center;">
+                    <div class="modal-dialog" style="width:50%">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            @*<div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                </div>*@
+                            <div class="modal-body">
+                                <img src="~/photos/@photo.nomFichier" style="width:70%;height:auto;" />
+                            </div>
+                            <div class="modal-footer" style="background-color:lightgray">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+        }
+
+
+    </div>
+    @*</div>
+        <div class="container" style="position:relative">*@
+
+    @*carrousel pompé sur w3schools !*@
+    <div style="width:60%; max-height:400px;">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @{ if (Model.photos.Count() != 0)
+                    {
+                        int i = 0;
+                        foreach (var photo in Model.photos)
+                        {
+                            if (i == 0)
+                            {
+                                <li data-target="#myCarousel" data-slide-to="@i" class="active" style="background-color:rebeccapurple"></li>}
+                            else
+                            {
+                                <li data-target="#myCarousel" data-slide-to="@i" style="background-color:rebeccapurple"></li>}
+                            i = i + 1;
+                        }
+                    }
+                    else
+                    {
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>}
+                }
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                @{ if (Model.photos.Count() != 0)
+                    {
+                        int i = 0;
+                        foreach (var photo in Model.photos)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="item active">
+                                    <img src="~/photos/@photo.nomFichier" alt="@photo.nomFichier" class="imagecarou">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item">
+                                    <img src="~/photos/@photo.nomFichier" alt="@photo.nomFichier" class="imagecarou">
+                                </div>
+                            }
+                            i = i + 1;
+                        }
+                    }
+                    else
+                    {
+                        <div class="item active">
+                            <img src="~/photos/defaut.jpg" alt="image par défaut" class="imagecarou">
+                        </div>
+                    }
+                }
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+<div>
+
+    <div width="60%">
+
+        <hr />
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                Fabricant
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Fabricant.Nom)
+            </dd>
+
+            <dt>
+                Hauteur (mm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Hauteur)
+            </dd>
+
+            <dt>
+                Largeur (mm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Largeur)
+            </dd>
+
+            <dt>
+                Longueur (mm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Longueur)
+            </dd>
+
+            <dt>
+                Poids (g)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Poids)
+            </dd>
+
+            <dt>
+                Capacité (nombre de pièces d'1€)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Capacite)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.produit.Couleur)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.produit.Couleur)
+            </dd>
+
+
+            <dt>
+                <a href="#descrip" class="btn btn-info" data-toggle="collapse" style="color:white">Description du produit</a>
+            </dt>
+
+            <dd>
+
+                <div id="descrip" class="collapse">
+                    @Html.DisplayFor(model => model.produit.Description)
+                </div>
+            </dd>
+        </dl>
+    </div>
+
+    <p class="btn btn-info" style="color:white">
+        @*@Html.ActionLink("Donnez votre avis !", "WriteAvis", "Client", new { id = Model.produit.id }
+    , new { style = "color:white" })*@
+        <!-- Trigger the modal with a button -->
+        <span type="button" data-toggle="modal" data-target="#avisModal"
+              style="max-height:120px">Donnez votre avis !</span>
+    </p>
+    <h4>Avis :</h4>
+    <p>
+        @{Html.RenderAction("AvisProd", "Client", new { id = Model.produit.id }); }
+    </p>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="avisModal" role="dialog" style="text-align:center; position:center;">
+        <div class="modal-dialog" style="width:70%;height:80%">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                @using (Html.BeginForm("WriteAvis", "Client", FormMethod.Post, new { id = Model.produit.id }))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Merci ! vous pouvez rédiger votre avis ici.</h3>
+                        <p>Un modérateur validera votre commentaire avant que celui-ci n'apparaisse sur le site.</p>
+                    </div>
+                    <div class="modal-body">
+
+                        @{Html.RenderAction("WriteAvis", "Client", new { id = Model.produit.id });}
+                    </div>
+                    @*<div class="modal-footer" style="background-color:lightgray">
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">Valider</button>
+                    </div>*@
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<hr />
+<div>
+    @{Html.RenderAction("SimilarProds", new { id = Model.produit.id });}
+
+</div>
+
+
+
+
+
